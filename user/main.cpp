@@ -33,6 +33,11 @@
 #include "Arduino.h"
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7789.h>
+#include "SdFat.h"
+
+#define SD_CONFIG SdSpiConfig(SS, DEDICATED_SPI, SD_SCK_MHZ(16), &SPI)
+
+static SdFat sd;
 
 typedef Adafruit_ST7789 SCREEN_CLASS;
 
@@ -74,6 +79,8 @@ int main(void)
 	screen.fillScreen(BLUE);
 	screen.setCursor(10,10);
 	screen.printf("Hello,World\n");
+	
+	sd.begin(SD_CONFIG);
   /* add user code end 2 */
 
   while(1)
