@@ -30,21 +30,12 @@
 
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
-#include "Arduino.h"
-#include <Adafruit_GFX.h>
-#include <Adafruit_ST7789.h>
+#include "HAL.h"
 #include "SdFat.h"
 
 #define SD_CONFIG SdSpiConfig(SS, DEDICATED_SPI, SD_SCK_MHZ(16), &SPI)
 
 static SdFat sd;
-
-typedef Adafruit_ST7789 SCREEN_CLASS;
-
-static SCREEN_CLASS screen(
-	PA15,
-	PB4,
-	PB6);
 /* add user code end private includes */
 /**
   * @brief main function.
@@ -73,13 +64,6 @@ int main(void)
 //	digitalWrite(PA2, HIGH);
 	Serial.begin(115200);
 	
-	screen.init(172, 320);
-	screen.setRotation(0);
-	screen.setTextSize(2);
-	screen.fillScreen(BLUE);
-	screen.setCursor(10,10);
-	screen.printf("Hello,World\n");
-	
 	sd.begin(SD_CONFIG);
   /* add user code end 2 */
 
@@ -87,10 +71,6 @@ int main(void)
   {
     /* add user code begin 3 */
 		digitalToggle(PC0);
-		Serial.printf("HelloWorld\n");
-		screen.fillScreen(BLUE);
-		screen.setCursor(10,30);
-		screen.printf("Tick :%d\n", millis());
 		delay_ms(1000);
     /* add user code end 3 */
   }

@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>AT32F435RGT7,USE_STDPERIPH_DRIVER,ARDUINO=111</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\user\inc;..\..\platform\f435\cmsis\cm4\device_support;..\..\platform\f435\cmsis\cm4\core_support;..\..\platform\f435\drivers\inc;..\..\platform\f435\mcu;..\..\platform\f435\core;..\..\Arduino;..\..\Arduino\libraries\SPI\src;..\..\Arduino\libraries\Wire\src;..\..\libraries\Adafruit_GFX;..\..\libraries\Adafruit_BusIO;..\..\libraries\Adafruit_ST77xx;..\..\libraries\SdFat-2.3.1\src;..\..\libraries\SdFat-2.3.1\src\common;..\..\libraries\SdFat-2.3.1\src\ExFatLib;..\..\libraries\SdFat-2.3.1\src\FatLib;..\..\libraries\SdFat-2.3.1\src\FsLib;..\..\libraries\SdFat-2.3.1\src\iostream;..\..\libraries\SdFat-2.3.1\src\SdCard</IncludePath>
+              <IncludePath>..\..\user\inc;..\..\platform\f435\cmsis\cm4\device_support;..\..\platform\f435\cmsis\cm4\core_support;..\..\platform\f435\drivers\inc;..\..\platform\f435\mcu;..\..\platform\f435\core;..\..\platform\f435\HAL;..\..\Arduino;..\..\Arduino\libraries\SPI\src;..\..\Arduino\libraries\Wire\src;..\..\libraries\Adafruit_GFX;..\..\libraries\Adafruit_BusIO;..\..\libraries\Adafruit_ST77xx;..\..\libraries\SdFat-2.3.1\src;..\..\libraries\SdFat-2.3.1\src\common;..\..\libraries\SdFat-2.3.1\src\ExFatLib;..\..\libraries\SdFat-2.3.1\src\FatLib;..\..\libraries\SdFat-2.3.1\src\FsLib;..\..\libraries\SdFat-2.3.1\src\iostream;..\..\libraries\SdFat-2.3.1\src\SdCard</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1082,6 +1082,21 @@
               <FileName>SdSpiChipSelect.cpp</FileName>
               <FileType>8</FileType>
               <FilePath>..\..\libraries\SdFat-2.3.1\src\SdCard\SdSpiCard\SpiDriver\SdSpiChipSelect.cpp</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>HAL</GroupName>
+          <Files>
+            <File>
+              <FileName>HAL.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\platform\f435\HAL\HAL.cpp</FilePath>
+            </File>
+            <File>
+              <FileName>HAL_Display.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\..\platform\f435\HAL\HAL_Display.cpp</FilePath>
             </File>
           </Files>
         </Group>
