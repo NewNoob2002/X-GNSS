@@ -33,7 +33,7 @@
 #include "HAL.h"
 #include "SdFat.h"
 
-#define SD_CONFIG SdSpiConfig(SS, DEDICATED_SPI, SD_SCK_MHZ(16), &SPI)
+#define SD_CONFIG SdSpiConfig(SS, DEDICATED_SPI, SD_SCK_MHZ(16), &SPI_SD)
 
 static SdFat sd;
 /* add user code end private includes */

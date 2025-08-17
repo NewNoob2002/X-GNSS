@@ -1,5 +1,9 @@
 #include "Arduino.h"
 
+#if defined(SPI1_ENABLE)
+SPIClass SPI_SD(&SD_SPI_config);
+#endif
+
 #if defined(SPI3_ENABLE)
 #define SPI_CLOCK (F_CPU / 2)
 SPIClass SPI(&SPI3_config);
@@ -72,6 +76,10 @@ void SPIClass::begin()
     //	if(this->SPI_InitStructure.transmission_mode == SPI_TRANSMIT_HALF_DUPLEX_TX &&
     //		 this->SPI_InitStructure.master_slave_mode == SPI_MODE_MASTER)
     //	{
+		if(this->spi_config->peripheral.miso_pin != PIN_MAX)
+		{
+			pinMode(this->spi_config->peripheral.miso_pin, OUTPUT_AF_PP);
+		}
     pinMode(this->spi_config->peripheral.mosi_pin, OUTPUT_AF_PP);
     pinMode(this->spi_config->peripheral.clk_pin, OUTPUT_AF_PP);
     //	}
@@ -85,7 +93,7 @@ void SPIClass::begin()
                  SPI_FRAME_8BIT,
                  SPI_MODE0,
                  SPI_CS_SOFTWARE_MODE,
-                 SPI_MCLK_DIV_2,
+                 SPI_MCLK_DIV_4,
                  SPI_FIRST_BIT_MSB);
     spi_init(this->spi_config->peripheral.register_base, &this->SPI_InitStructure);
 

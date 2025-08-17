@@ -10,3 +10,14 @@ spi_config_t SPI3_config = {
 		.mux_sel = GPIO_MUX_6,
 	}
 };
+
+spi_config_t SD_SPI_config = {
+	.peripheral = {
+		.register_base = SPI1,
+		.peripheral_clock_id = CRM_SPI1_PERIPH_CLOCK,
+		.mosi_pin = PA7,
+		.miso_pin = PA6,
+		.clk_pin = PA5,
+		.mux_sel = GPIO_MUX_5,
+	}
+};

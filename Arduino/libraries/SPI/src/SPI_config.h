@@ -53,9 +53,13 @@ struct spi_config_t
 };
 
 
+#define SPI1_ENABLE
+#if defined(SPI1_ENABLE)
+extern spi_config_t SD_SPI_config;
+#endif
+
 #define SPI3_ENABLE
 #if defined(SPI3_ENABLE)
 extern spi_config_t SPI3_config;
-// #define USART1_IOMUX_ENABLE
 #endif
 #endif
