@@ -106,6 +106,7 @@ void HAL::Display_Init()
     screen.setCursor(0, 0);
     screen.setFont();
     screen.setTextColor(WHITE, BLUE);
+		screen.printf("HelloWorld\n");
 
     Display_SPI_DMA_Init();
 

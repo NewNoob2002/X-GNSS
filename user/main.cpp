@@ -59,12 +59,19 @@ int main(void)
   wk_nvic_config();
 
   /* add user code begin 2 */
-	pinMode(PC0, OUTPUT);
-//	pinMode(PB7, OUTPUT);
-//	digitalWrite(PA2, HIGH);
 	Serial.begin(115200);
+	pinMode(PC0, OUTPUT);
+	HAL::Display_Init();
+	SPI_SD.begin();
 	
-	sd.begin(SD_CONFIG);
+	if(!sd.begin(SD_CONFIG))
+	{
+		while(1)
+		{
+			digitalToggle(PC0);
+			delay_ms(100);
+		}
+	}
   /* add user code end 2 */
 
   while(1)

@@ -9,7 +9,7 @@ spi_config_t SPI3_config = {
 		.clk_pin = PB3,
 		.mux_sel = GPIO_MUX_6,
 	}
-};
+};                                                                                                                      
 
 spi_config_t SD_SPI_config = {
 	.peripheral = {

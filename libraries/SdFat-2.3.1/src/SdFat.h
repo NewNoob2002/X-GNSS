@@ -41,7 +41,7 @@
 /** SdFat version as string. */
 #define SD_FAT_VERSION_STR "2.3.1"
 //==============================================================================
-#define SS PA4
+#define SS PA3
 /**
  * \class SdBase
  * \brief base SD file system template class.
