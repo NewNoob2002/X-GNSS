@@ -100,3 +100,20 @@ int __write(int fd, char *pbuffer, int size)
 }
 #endif
 
+uint32_t getAhbFrequency() {
+  crm_clocks_freq_type conf;
+  crm_clocks_freq_get(&conf);
+  return conf.ahb_freq;
+}
+
+uint32_t getApb2Frequency() {
+  crm_clocks_freq_type conf;
+  crm_clocks_freq_get(&conf);
+  return conf.apb2_freq;
+}
+
+uint32_t getApb1Frequency() {
+  crm_clocks_freq_type conf;
+  crm_clocks_freq_get(&conf);
+  return conf.apb1_freq;
+}

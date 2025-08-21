@@ -2,6 +2,7 @@
 #define __SPI_CONFIG_H
 
 #include "mcu_types.h"
+#include "wk_system.h"
 #include "gpio/gpio.h"
 /**
  * @brief SPI peripheral configuration
@@ -62,4 +63,7 @@ extern spi_config_t SD_SPI_config;
 #if defined(SPI3_ENABLE)
 extern spi_config_t SPI3_config;
 #endif
+
+extern const spi_mclk_freq_div_type mclkpMap[];
+extern const uint8_t mapSize;
 #endif

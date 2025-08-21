@@ -5,18 +5,23 @@ SPIClass SPI_SD(&SD_SPI_config);
 #endif
 
 #if defined(SPI3_ENABLE)
-#define SPI_CLOCK (F_CPU / 2)
 SPIClass SPI(&SPI3_config);
 #endif
 
 SPIClass::SPIClass(spi_config_t *config)
-    : spi_config(config), clock_div(0), dataSize(0), bitOrder(0), dataMode(0), initialized(false)
+    : spi_config(config), _use_hw_ss(false),
+      _div(0),
+      _freq(1000000),
+      _inTransaction(false),
+      _isInitlized(false)
 {
+    this->spi_x = spi_config->peripheral.register_base;
     memset(&this->SPI_InitStructure, 0, sizeof(this->SPI_InitStructure));
 }
 
 SPIClass::~SPIClass()
 {
+    end();
 }
 
 void SPIClass::SPI_Settings(
@@ -27,16 +32,9 @@ void SPIClass::SPI_Settings(
     spi_mclk_freq_div_type SPI_BaudRatePrescaler_x,
     spi_first_bit_type SPI_FirstBit_x)
 {
-    crm_periph_clock_enable(this->spi_config->peripheral.peripheral_clock_id, TRUE);
-		gpio_pin_mux_config(digitalPinToPort(this->spi_config->peripheral.mosi_pin), 
-											 (gpio_pins_source_type)digitalPinToBitPos(this->spi_config->peripheral.mosi_pin),
-												this->spi_config->peripheral.mux_sel);
-		gpio_pin_mux_config(digitalPinToPort(this->spi_config->peripheral.clk_pin), 
-											 (gpio_pins_source_type)digitalPinToBitPos(this->spi_config->peripheral.clk_pin),
-												this->spi_config->peripheral.mux_sel);
-		
     spi_clock_polarity_type SPI_CPOL_x;
     spi_clock_phase_type SPI_CPHA_x;
+    spi_enable(this->spi_x, FALSE);
 
     switch (SPI_MODEx)
     {
@@ -69,103 +67,96 @@ void SPIClass::SPI_Settings(
     SPI_InitStructure.clock_polarity = SPI_CPOL_x;
     SPI_InitStructure.clock_phase = SPI_CPHA_x;
     SPI_InitStructure.cs_mode_selection = SPI_NSS_x;
+
+    spi_init(this->spi_x, &this->SPI_InitStructure);
+
+    spi_enable(this->spi_x, TRUE);
 }
 
 void SPIClass::begin()
 {
-    //	if(this->SPI_InitStructure.transmission_mode == SPI_TRANSMIT_HALF_DUPLEX_TX &&
-    //		 this->SPI_InitStructure.master_slave_mode == SPI_MODE_MASTER)
-    //	{
-		if(this->spi_config->peripheral.miso_pin != PIN_MAX)
-		{
-			pinMode(this->spi_config->peripheral.miso_pin, OUTPUT_AF_PP);
-		}
+    if (_isInitlized)
+    {
+        return;
+    }
+
+    if (!_div)
+    {
+        setClock(_freq);
+    }
+
+    spi_i2s_reset(this->spi_x);
+    crm_periph_clock_enable(this->spi_config->peripheral.peripheral_clock_id, TRUE);
+
+    if (this->spi_config->peripheral.miso_pin != PIN_MAX)
+    {
+        pinMode(this->spi_config->peripheral.miso_pin, OUTPUT_AF_PP);
+    }
     pinMode(this->spi_config->peripheral.mosi_pin, OUTPUT_AF_PP);
     pinMode(this->spi_config->peripheral.clk_pin, OUTPUT_AF_PP);
-    //	}
-    //	else
-    //	{
-    //		pinMode(this->spi_config->peripheral.mosi_pin, OUTPUT_AF_PP);
-    //		pinMode(this->spi_config->peripheral.miso_pin, OUTPUT_AF_PP);
-    //		pinMode(this->spi_config->peripheral.clk_pin,  OUTPUT_AF_PP_DOWN);
-    //	}
+
+    gpio_pin_mux_config(digitalPinToPort(this->spi_config->peripheral.mosi_pin),
+                        (gpio_pins_source_type)digitalPinToBitPos(this->spi_config->peripheral.mosi_pin),
+                        this->spi_config->peripheral.mux_sel);
+    gpio_pin_mux_config(digitalPinToPort(this->spi_config->peripheral.clk_pin),
+                        (gpio_pins_source_type)digitalPinToBitPos(this->spi_config->peripheral.clk_pin),
+                        this->spi_config->peripheral.mux_sel);
+    if (this->spi_config->peripheral.miso_pin != PIN_MAX)
+    {
+        gpio_pin_mux_config(digitalPinToPort(this->spi_config->peripheral.miso_pin),
+                            (gpio_pins_source_type)digitalPinToBitPos(this->spi_config->peripheral.miso_pin),
+                            this->spi_config->peripheral.mux_sel);
+    }
+
     SPI_Settings(SPI_MODE_MASTER,
                  SPI_FRAME_8BIT,
                  SPI_MODE0,
                  SPI_CS_SOFTWARE_MODE,
                  SPI_MCLK_DIV_4,
                  SPI_FIRST_BIT_MSB);
-    spi_init(this->spi_config->peripheral.register_base, &this->SPI_InitStructure);
-
-    spi_enable(this->spi_config->peripheral.register_base, TRUE);
-    this->initialized = true;
+    _isInitlized = true;
 }
 
 void SPIClass::begin(uint32_t clock, uint16_t dataOrder, uint16_t dataMode)
 {
     begin();
-    spi_enable(this->spi_config->peripheral.register_base, FALSE);
+    spi_enable(this->spi_x, FALSE);
     setClock(clock);
     setBitOrder(dataOrder);
     setDataMode(dataMode);
-    spi_init(this->spi_config->peripheral.register_base, &this->SPI_InitStructure);
-
-    spi_enable(this->spi_config->peripheral.register_base, TRUE);
+    spi_enable(this->spi_x, TRUE);
 }
 
 void SPIClass::begin(SPISettings settings)
 {
     begin();
+    spi_enable(this->spi_x, FALSE);
     setClock(settings.clock);
     setBitOrder(settings.bitOrder);
     setDataMode(settings.dataMode);
-    // SPI_Enable(SPIx, ENABLE);
+    spi_enable(this->spi_x, TRUE);
 }
 
 void SPIClass::end(void)
 {
-    spi_enable(this->spi_config->peripheral.register_base, FALSE);
+    spi_enable(this->spi_x, FALSE);
 }
 
 void SPIClass::setClock(uint32_t clock)
 {
-    if (clock == 0)
+    if (clock == 0 || clock < 1 * 1000 * 1000)
     {
         return;
     }
-
-    static const spi_mclk_freq_div_type mclkpMap[] =
-        {
-            SPI_MCLK_DIV_2,
-            SPI_MCLK_DIV_2,
-            SPI_MCLK_DIV_4,
-            SPI_MCLK_DIV_8,
-            SPI_MCLK_DIV_16,
-            SPI_MCLK_DIV_32,
-            SPI_MCLK_DIV_64,
-            SPI_MCLK_DIV_128,
-            SPI_MCLK_DIV_256,
-            SPI_MCLK_DIV_512,
-            SPI_MCLK_DIV_1024,
-        };
-    const uint8_t mapSize = sizeof(mclkpMap) / sizeof(mclkpMap[0]);
-    uint32_t clockDiv = SPI_CLOCK / clock;
-    uint8_t mapIndex = 0;
-
-    while (clockDiv > 1)
+    uint8_t cdev = spi_x->ctrl1_bit.mdiv_l;
+    if (_freq != clock || cdev != _div)
     {
-        clockDiv = clockDiv >> 1;
-        mapIndex++;
+        _freq = clock;
+        _div = spiFrequencyToClockDiv(_freq);
+        spi_x->ctrl2_bit.mdiv3en = FALSE;
+        spi_x->ctrl2_bit.mdiv_h = FALSE;
+        spi_x->ctrl1_bit.mdiv_l = _div;
     }
-
-    if (mapIndex >= mapSize)
-    {
-        mapIndex = mapSize - 1;
-    }
-
-    spi_mclk_freq_div_type mclkp = mclkpMap[mapIndex];
-
-    SPI_InitStructure.mclk_freq_division = mclkp;
 }
 
 void SPIClass::setClockDivider(uint32_t Div)
@@ -177,15 +168,13 @@ void SPIClass::setClockDivider(uint32_t Div)
 #if SPI_CLASS_AVR_COMPATIBILITY_MODE
     setClock(16000000 / Div); // AVR:16MHz
 #else
-    setClock(SPI_CLOCK / Div);
+    setClock(getApb1Frequency() / Div);
 #endif
 }
 
 void SPIClass::setBitOrder(uint16_t bitOrder)
 {
-    SPI_InitStructure.first_bit_transmission = (bitOrder == MSBFIRST) ? SPI_FIRST_BIT_MSB : SPI_FIRST_BIT_LSB;
-    //    SPI_Init(SPIx, &SPI_InitStructure);
-    //    SPI_Enable(SPIx, ENABLE);
+    spi_x->ctrl1_bit.ltf = (bitOrder == LSBFIRST) ? 1 : 0;
 }
 
 /*  Victor Perez. Added to test changing datasize from 8 to 16 bit modes on the fly.
@@ -195,9 +184,7 @@ void SPIClass::setBitOrder(uint16_t bitOrder)
 void SPIClass::setDataSize(spi_frame_bit_num_type datasize)
 {
 
-    SPI_InitStructure.frame_bit_num = datasize;
-    // SPI_Init(SPIx, &SPI_InitStructure);
-    // SPI_Enable(SPIx, ENABLE);
+    spi_x->ctrl1_bit.fbn = datasize == SPI_FRAME_16BIT ? 1 : 0;
 }
 
 void SPIClass::setDataMode(uint8_t dataMode)
@@ -252,12 +239,8 @@ void SPIClass::setDataMode(uint8_t dataMode)
     default:
         return;
     }
-
-    SPI_InitStructure.clock_polarity = SPI_CPOL_x;
-    SPI_InitStructure.clock_phase = SPI_CPHA_x;
-    spi_init(this->spi_config->peripheral.register_base, &this->SPI_InitStructure);
-
-    spi_enable(this->spi_config->peripheral.register_base, TRUE);
+    spi_x->ctrl1_bit.clkpol = SPI_CPOL_x;
+    spi_x->ctrl1_bit.clkpha = SPI_CPHA_x;
 }
 
 void SPIClass::beginTransaction(SPISettings settings)

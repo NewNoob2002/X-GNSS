@@ -35,6 +35,9 @@ void wk_timebase_init(void);
 void wk_delay_us(uint32_t delay);
 void wk_delay_ms(uint32_t delay);
 
+uint32_t getAhbFrequency();
+uint32_t getApb2Frequency();
+uint32_t getApb1Frequency();
 #ifdef __cplusplus
 }
 #endif

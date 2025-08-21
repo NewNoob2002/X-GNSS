@@ -21,12 +21,13 @@ public:
                   int8_t rst = -1);
   Adafruit_ST7789(int8_t cs, int8_t dc, int8_t rst);
 #if !defined(ESP8266)
-  Adafruit_ST7789(SPIClass *spiClass, int8_t cs, int8_t dc, int8_t rst);
+  Adafruit_ST7789(SPIClass *spiClass, int8_t cs, int8_t dc, int8_t rst, int8_t blk);
 #endif // end !ESP8266
 
   void setRotation(uint8_t m);
   void init(uint16_t width, uint16_t height, uint8_t spiMode = SPI_MODE0);
-
+	void displayOn();
+  void displayOff();
 protected:
   uint8_t _colstart2 = 0, ///< Offset from the right
       _rowstart2 = 0;     ///< Offset from the bottom
@@ -34,6 +35,8 @@ protected:
 private:
   uint16_t windowWidth;
   uint16_t windowHeight;
+
+	int8_t blk_pin;
 };
 
 #endif // _ADAFRUIT_ST7789H_

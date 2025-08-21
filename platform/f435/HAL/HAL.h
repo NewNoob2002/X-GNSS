@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include "mcu_types.h"
+#include "mcu_define.h"
 #include "Arduino.h"
 #include "HAL_Config.h"
 
@@ -22,7 +23,7 @@ void Backlight_ForceLit(bool en);
 /* Display */
 void Display_Init();
 void Display_DumpCrashInfo(const char* info);
-void Display_SetAddrWindow(int16_t x0, int16_t y0, int16_t x1, int16_t y1);
+void Display_SetAddrWindow(int16_t x0, int16_t y0, int16_t w, int16_t h);
 void Display_SendPixels(const uint16_t* pixels, uint32_t len);
     
 typedef void(*Display_CallbackFunc_t)(void);

@@ -33,8 +33,11 @@ Adafruit_ST7789::Adafruit_ST7789(int8_t cs, int8_t dc, int8_t rst)
     @param  rst       Reset pin # (optional, pass -1 if unused)
 */
 Adafruit_ST7789::Adafruit_ST7789(SPIClass *spiClass, int8_t cs, int8_t dc,
-                                 int8_t rst)
-    : Adafruit_ST77xx(240, 320, spiClass, cs, dc, rst) {}
+                                 int8_t rst, int8_t blk)
+    : Adafruit_ST77xx(240, 320, spiClass, cs, dc, rst) {
+			this->blk_pin = blk;
+			pinMode(this->blk_pin, OUTPUT);
+		}
 #endif // end !ESP8266
 
 // SCREEN INITIALIZATION ***************************************************
@@ -171,4 +174,14 @@ void Adafruit_ST7789::setRotation(uint8_t m) {
   }
 
   sendCommand(ST77XX_MADCTL, &madctl, 1);
+}
+
+void Adafruit_ST7789::displayOn()
+{
+	digitalWrite(blk_pin, LOW);
+}
+
+void Adafruit_ST7789::displayOff()
+{
+	digitalWrite(blk_pin, HIGH);
 }

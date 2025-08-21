@@ -1,0 +1,1044 @@
+{
+  "name": "X-GNSS",
+  "type": "ARM",
+  "dependenceList": [],
+  "srcDirs": [],
+  "virtualFolder": {
+    "name": "<virtual_root>",
+    "files": [],
+    "folders": [
+      {
+        "name": "user",
+        "files": [
+          {
+            "path": "user/main.cpp"
+          }
+        ],
+        "folders": [
+          {
+            "name": "src",
+            "files": [
+              {
+                "path": "user/src/at32f435_437_int.c"
+              },
+              {
+                "path": "user/src/at32f435_437_wk_config.c"
+              },
+              {
+                "path": "user/src/wk_system.c"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "gui",
+        "files": [
+          {
+            "path": "user/gui/ui/actions.c"
+          },
+          {
+            "path": "user/gui/ui/anim.c"
+          },
+          {
+            "path": "user/gui/ui/images.c"
+          },
+          {
+            "path": "user/gui/ui/screens.c"
+          },
+          {
+            "path": "user/gui/ui/styles.c"
+          },
+          {
+            "path": "user/gui/ui/ui.c"
+          },
+          {
+            "path": "user/gui/font/main_symbol2.c"
+          },
+          {
+            "path": "user/gui/font/main_symbol32.c"
+          },
+          {
+            "path": "user/gui/font/symbol_radio.c"
+          },
+          {
+            "path": "user/gui/font/symbol_satellite48.c"
+          }
+        ],
+        "folders": []
+      },
+      {
+        "name": "platform",
+        "files": [],
+        "folders": [
+          {
+            "name": "cmsis",
+            "files": [
+              {
+                "path": "project/MDK_V5/startup_at32f435_437.s"
+              },
+              {
+                "path": "platform/f435/cmsis/cm4/device_support/system_at32f435_437.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "drivers",
+            "files": [
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_adc.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_crm.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_debug.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_dma.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_edma.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_exint.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_gpio.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_i2c.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_misc.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_pwc.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_spi.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_tmr.c"
+              },
+              {
+                "path": "platform/f435/drivers/src/at32f435_437_usart.c"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "core",
+            "files": [
+              {
+                "path": "platform/f435/core/adc/adc.cpp"
+              },
+              {
+                "path": "platform/f435/core/adc/adc_config.cpp"
+              },
+              {
+                "path": "platform/f435/core/gpio/gpio.cpp"
+              },
+              {
+                "path": "platform/f435/core/usart/usart.cpp"
+              },
+              {
+                "path": "platform/f435/core/usart/usart_config.cpp"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "Arduino",
+        "files": [
+          {
+            "path": "Arduino/delay.c"
+          },
+          {
+            "path": "Arduino/itoa.c"
+          },
+          {
+            "path": "Arduino/yield.c"
+          },
+          {
+            "path": "Arduino/abi.cpp"
+          },
+          {
+            "path": "Arduino/Print.cpp"
+          },
+          {
+            "path": "Arduino/Stream.cpp"
+          },
+          {
+            "path": "Arduino/WMath.cpp"
+          },
+          {
+            "path": "Arduino/WString.cpp"
+          },
+          {
+            "path": "Arduino/variants/at32f403a_xx/variant.cpp"
+          },
+          {
+            "path": "Arduino/avr/dtostrf.c"
+          }
+        ],
+        "folders": [
+          {
+            "name": "libraries",
+            "files": [
+              {
+                "path": "Arduino/libraries/SPI/src/SPI.cpp"
+              },
+              {
+                "path": "Arduino/libraries/SPI/src/SPI_config.cpp"
+              },
+              {
+                "path": "Arduino/libraries/Wire/src/Wire.cpp"
+              }
+            ],
+            "folders": []
+          }
+        ]
+      },
+      {
+        "name": "libraries",
+        "files": [],
+        "folders": [
+          {
+            "name": "Adafruit_GFX",
+            "files": [
+              {
+                "path": "libraries/Adafruit_BusIO/Adafruit_BusIO_Register.cpp"
+              },
+              {
+                "path": "libraries/Adafruit_BusIO/Adafruit_GenericDevice.cpp"
+              },
+              {
+                "path": "libraries/Adafruit_BusIO/Adafruit_I2CDevice.cpp"
+              },
+              {
+                "path": "libraries/Adafruit_BusIO/Adafruit_SPIDevice.cpp"
+              },
+              {
+                "path": "libraries/Adafruit_GFX/Adafruit_GFX.cpp"
+              },
+              {
+                "path": "libraries/Adafruit_GFX/Adafruit_SPITFT.cpp"
+              },
+              {
+                "path": "libraries/Adafruit_ST77xx/Adafruit_ST77xx.cpp"
+              },
+              {
+                "path": "libraries/Adafruit_ST77xx/Adafruit_ST7789.cpp"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "SdFat",
+            "files": [
+              {
+                "path": "libraries/SdFat-2.3.1/src/FreeStack.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/SdCard/SdCardInfo.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/SdCard/SdSpiCard/SdSpiCard.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/FmtNumber.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/FsCache.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/FsDateTime.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/FsStructs.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/FsUtf.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/PrintBasic.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/upcase.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatDbg.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatFile.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatFilePrint.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatFileWrite.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatFormatter.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatName.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatPartition.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/ExFatLib/ExFatVolume.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatDbg.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatFile.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatFileLFN.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatFilePrint.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatFileSFN.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatFormatter.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatName.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatPartition.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FatLib/FatVolume.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FsLib/FsFile.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/common/FsName.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FsLib/FsNew.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/FsLib/FsVolume.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/iostream/istream.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/iostream/ostream.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/iostream/StdioStream.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/iostream/StreamBaseClass.cpp"
+              },
+              {
+                "path": "libraries/SdFat-2.3.1/src/SdCard/SdSpiCard/SpiDriver/SdSpiChipSelect.cpp"
+              }
+            ],
+            "folders": []
+          },
+          {
+            "name": "lvgl",
+            "files": [],
+            "folders": [
+              {
+                "name": "config",
+                "files": [
+                  {
+                    "path": "libraries/lvgl/lv_conf.h"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "src",
+                "files": [
+                  {
+                    "path": "libraries/lvgl/src/core/lv_disp.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_event.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_group.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_indev.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_indev_scroll.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj_class.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj_draw.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj_pos.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj_scroll.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj_style.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj_style_gen.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_obj_tree.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_refr.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/core/lv_theme.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_arc.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_img.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_label.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_layer.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_line.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_mask.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_rect.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_transform.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_draw_triangle.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_img_buf.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_img_cache.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/lv_img_decoder.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_arc.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_blend.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_dither.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_gradient.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_img.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_layer.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_letter.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_line.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_polygon.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_rect.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/draw/sw/lv_draw_sw_transform.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/layouts/flex/lv_flex.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/layouts/grid/lv_grid.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/themes/basic/lv_theme_basic.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/themes/default/lv_theme_default.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/themes/mono/lv_theme_mono.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/animimg/lv_animimg.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/calendar/lv_calendar.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/calendar/lv_calendar_header_arrow.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/calendar/lv_calendar_header_dropdown.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/chart/lv_chart.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/colorwheel/lv_colorwheel.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/imgbtn/lv_imgbtn.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/keyboard/lv_keyboard.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/led/lv_led.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/list/lv_list.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/menu/lv_menu.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/meter/lv_meter.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/msgbox/lv_msgbox.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/span/lv_span.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/spinbox/lv_spinbox.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/spinner/lv_spinner.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/tabview/lv_tabview.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/tileview/lv_tileview.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/widgets/win/lv_win.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/extra/lv_extra.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_dejavu_16_persian_hebrew.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_fmt_txt.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_loader.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_8.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_10.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_12.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_12_subpx.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_14.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_16.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_18.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_20.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_22.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_24.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_26.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_28.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_28_compressed.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_30.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_32.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_34.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_36.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_38.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_40.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_42.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_44.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_46.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_montserrat_48.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_simsun_16_cjk.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_unscii_8.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/font/lv_font_unscii_16.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/hal/lv_hal_disp.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/hal/lv_hal_indev.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/hal/lv_hal_tick.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_anim.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_anim_timeline.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_area.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_async.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_bidi.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_color.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_fs.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_gc.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_ll.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_log.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_lru.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_math.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_mem.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_printf.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_style.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_style_gen.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_templ.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_timer.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_tlsf.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_txt.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_txt_ap.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/misc/lv_utils.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_arc.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_bar.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_btn.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_btnmatrix.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_canvas.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_checkbox.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_dropdown.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_img.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_label.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_line.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_objx_templ.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_roller.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_slider.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_switch.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_table.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/src/widgets/lv_textarea.c"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "port",
+                "files": [
+                  {
+                    "path": "libraries/lvgl/porting/lv_port_disp.cpp"
+                  }
+                ],
+                "folders": []
+              },
+              {
+                "name": "demos",
+                "files": [
+                  {
+                    "path": "libraries/lvgl/demos/widgets/lv_demo_widgets.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/demos/widgets/assets/img_clothes.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/demos/widgets/assets/img_demo_widgets_avatar.c"
+                  },
+                  {
+                    "path": "libraries/lvgl/demos/widgets/assets/img_lvgl_logo.c"
+                  }
+                ],
+                "folders": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "HAL",
+        "files": [
+          {
+            "path": "platform/f435/HAL/HAL.cpp"
+          },
+          {
+            "path": "platform/f435/HAL/HAL_Display.cpp"
+          }
+        ],
+        "folders": []
+      }
+    ]
+  },
+  "outDir": "build",
+  "deviceName": null,
+  "packDir": null,
+  "miscInfo": {
+    "uid": "b1c7a4f82d97297843062a76c514791f"
+  },
+  "targets": {
+    "X-GNSS": {
+      "excludeList": [
+        "<virtual_root>/libraries/Adafruit_GFX/Adafruit_BusIO_Register.cpp",
+        "<virtual_root>/libraries/Adafruit_GFX/Adafruit_GenericDevice.cpp",
+        "<virtual_root>/libraries/Adafruit_GFX/Adafruit_I2CDevice.cpp",
+        "<virtual_root>/libraries/Adafruit_GFX/Adafruit_SPIDevice.cpp",
+        "<virtual_root>/libraries/SdFat/FreeStack.cpp",
+        "<virtual_root>/libraries/lvgl/demos"
+      ],
+      "toolchain": "AC6",
+      "compileConfig": {
+        "cpuType": "Cortex-M4",
+        "archExtensions": "",
+        "floatingPointHardware": "single",
+        "scatterFilePath": "",
+        "useCustomScatterFile": false,
+        "storageLayout": {
+          "RAM": [
+            {
+              "tag": "RAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "RAM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x20000000",
+                "size": "0x60000"
+              },
+              "isChecked": true,
+              "noInit": false
+            },
+            {
+              "tag": "IRAM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "noInit": false
+            }
+          ],
+          "ROM": [
+            {
+              "tag": "ROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "ROM",
+              "id": 3,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            },
+            {
+              "tag": "IROM",
+              "id": 1,
+              "mem": {
+                "startAddr": "0x8000000",
+                "size": "0x100000"
+              },
+              "isChecked": true,
+              "isStartup": true
+            },
+            {
+              "tag": "IROM",
+              "id": 2,
+              "mem": {
+                "startAddr": "0x0",
+                "size": "0x0"
+              },
+              "isChecked": false,
+              "isStartup": false
+            }
+          ]
+        },
+        "options": "null"
+      },
+      "uploader": "JLink",
+      "uploadConfig": {
+        "bin": "",
+        "baseAddr": "",
+        "cpuInfo": {
+          "vendor": "null",
+          "cpuName": "null"
+        },
+        "proType": 1,
+        "speed": 8000,
+        "otherCmds": ""
+      },
+      "uploadConfigMap": {},
+      "custom_dep": {
+        "name": "default",
+        "incList": [
+          "user/inc",
+          "user/gui",
+          "platform/f435/cmsis/cm4/device_support",
+          "platform/f435/cmsis/cm4/core_support",
+          "platform/f435/drivers/inc",
+          "platform/f435/mcu",
+          "platform/f435/core",
+          "platform/f435/HAL",
+          "Arduino",
+          "Arduino/libraries/SPI/src",
+          "Arduino/libraries/Wire/src",
+          "libraries/Adafruit_GFX",
+          "libraries/Adafruit_BusIO",
+          "libraries/Adafruit_ST77xx",
+          "libraries/SdFat-2.3.1/src",
+          "libraries/SdFat-2.3.1/src/common",
+          "libraries/SdFat-2.3.1/src/ExFatLib",
+          "libraries/SdFat-2.3.1/src/FatLib",
+          "libraries/SdFat-2.3.1/src/FsLib",
+          "libraries/SdFat-2.3.1/src/iostream",
+          "libraries/SdFat-2.3.1/src/SdCard",
+          "libraries/lvgl",
+          "libraries/lvgl/porting",
+          ".cmsis/include",
+          "project/MDK_V5/RTE/_X-GNSS"
+        ],
+        "libList": [],
+        "defineList": [
+          "AT32F435RGT7",
+          "USE_STDPERIPH_DRIVER",
+          "ARDUINO=111"
+        ]
+      },
+      "builderOptions": {
+        "AC6": {
+          "version": 3,
+          "beforeBuildTasks": [],
+          "afterBuildTasks": [],
+          "global": {
+            "use-microLIB": false,
+            "output-debug-info": "enable"
+          },
+          "c/cpp-compiler": {
+            "optimization": "level-1",
+            "language-c": "c99",
+            "language-cpp": "c++11",
+            "link-time-optimization": false,
+            "one-elf-section-per-function": true,
+            "short-enums#wchar": true,
+            "warnings": "ac5-like-warnings"
+          },
+          "asm-compiler": {
+            "$use": "asm-auto",
+            "misc-controls": ""
+          },
+          "linker": {
+            "$outputTaskExcludes": [
+              ".bin"
+            ],
+            "output-format": "elf",
+            "misc-controls": "--diag_suppress=L6329",
+            "xo-base": "",
+            "ro-base": "0x08000000",
+            "rw-base": "0x20000000"
+          }
+        }
+      }
+    }
+  },
+  "version": "3.6"
+}

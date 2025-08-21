@@ -1,29 +1,3 @@
-/* add user code begin Header */
-/**
-  **************************************************************************
-  * @file     main.c
-  * @brief    main program
-  **************************************************************************
-  *                       Copyright notice & Disclaimer
-  *
-  * The software Board Support Package (BSP) that is made available to
-  * download from Artery official website is the copyrighted work of Artery.
-  * Artery authorizes customers to use, copy, and distribute the BSP
-  * software and its related documentation for the purpose of design and
-  * development in conjunction with Artery microcontrollers. Use of the
-  * software is governed by this copyright notice and the following disclaimer.
-  *
-  * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
-  * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
-  * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
-  * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
-  * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
-  * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
-  *
-  **************************************************************************
-  */
-/* add user code end Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "at32f435_437_wk_config.h"
 #include "wk_system.h"
@@ -31,11 +5,123 @@
 /* private includes ----------------------------------------------------------*/
 /* add user code begin private includes */
 #include "HAL.h"
+#include "lv_port.h"
+#include "ui/ui.h"
 #include "SdFat.h"
+#include "sdios.h"
 
 #define SD_CONFIG SdSpiConfig(SS, DEDICATED_SPI, SD_SCK_MHZ(16), &SPI_SD)
 
-static SdFat sd;
+// SdCardFactory constructs and initializes the appropriate card.
+SdCardFactory cardFactory;
+// Pointer to generic SD card.
+SdCard *m_card = nullptr;
+uint32_t const ERASE_SIZE = 262144L;
+ArduinoOutStream cout(Serial);
+uint32_t cardSectorCount = 0;
+uint8_t sectorBuffer[512] __attribute__((aligned(4)));
+
+#define sdError(msg)                        \
+  {                                         \
+    cout << F("error: ") << F(msg) << endl; \
+    sdErrorHalt();                          \
+  }
+
+void sdErrorHalt()
+{
+  if (!m_card)
+  {
+    cout << F("Invalid SD_CONFIG") << endl;
+  }
+  else if (m_card->errorCode())
+  {
+    if (m_card->errorCode() == SD_CARD_ERROR_CMD0)
+    {
+      cout << F("No card, wrong chip select pin, or wiring error?") << endl;
+    }
+    cout << F("SD errorCode: ") << hex << showbase;
+    printSdErrorSymbol(&Serial, m_card->errorCode());
+    cout << F(" = ") << int(m_card->errorCode()) << endl;
+    cout << F("SD errorData = ") << int(m_card->errorData()) << endl;
+  }
+}
+
+void formatCard()
+{
+  uint32_t firstBlock = 0;
+  uint32_t lastBlock;
+  uint16_t n = 0;
+  // Select and initialize proper card driver.
+  m_card = cardFactory.newCard(SdSpiConfig(SS, DEDICATED_SPI, SD_SCK_MHZ(16), &SPI_SD));
+  if (!m_card || m_card->errorCode())
+  {
+    sdError("card init failed.");
+    return;
+  }
+  cardSectorCount = m_card->sectorCount();
+  if (!cardSectorCount)
+  {
+    sdError("Get sector count failed.");
+    return;
+  }
+  auto cardSize = cardSectorCount * 512e-9;
+  printf("Card size: %f GB (GB = 1E9 bytes)\n", cardSize);
+  printf("Card will be formated ");
+  if (cardSectorCount > 67108864)
+  {
+    printf("exFAT\n");
+  }
+  else if (cardSectorCount > 4194304)
+  {
+    printf("FAT32\n");
+  }
+  else
+  {
+    printf("FAT16\n");
+  }
+  do
+  {
+    lastBlock = firstBlock + ERASE_SIZE - 1;
+    if (lastBlock >= cardSectorCount)
+    {
+      lastBlock = cardSectorCount - 1;
+    }
+    if (!m_card->erase(firstBlock, lastBlock))
+    {
+      sdError("erase failed");
+    }
+    printf(".");
+    if ((n++) % 64 == 63)
+    {
+      printf("\n");
+    }
+    firstBlock += ERASE_SIZE;
+  } while (firstBlock < cardSectorCount);
+
+  if (!m_card->readSector(0, sectorBuffer))
+  {
+    sdError("readBlock");
+  }
+  printf("All data set to %d\n", int(sectorBuffer[0]));
+  printf("Erase done\n");
+  ExFatFormatter exFatFormatter;
+  FatFormatter fatFormatter;
+
+  // Format exFAT if larger than 32GB.
+  bool rtn = cardSectorCount > 67108864
+                 ? exFatFormatter.format(m_card, sectorBuffer, &Serial)
+                 : fatFormatter.format(m_card, sectorBuffer, &Serial);
+
+  if (!rtn)
+  {
+    sdErrorHalt();
+  }
+  cout << F("Run the SdInfo example for format details.") << endl;
+}
+
+
+SystemInfo_t systemInfo;
+BatteryState batteryState;
 /* add user code end private includes */
 /**
   * @brief main function.
@@ -63,22 +149,17 @@ int main(void)
 	pinMode(PC0, OUTPUT);
 	HAL::Display_Init();
 	SPI_SD.begin();
-	
-	if(!sd.begin(SD_CONFIG))
-	{
-		while(1)
-		{
-			digitalToggle(PC0);
-			delay_ms(100);
-		}
-	}
-  /* add user code end 2 */
-
+	formatCard();
+//	lv_init();
+//	lv_port_init();
+//  /* add user code end 2 */
+//	ui_init();
   while(1)
   {
     /* add user code begin 3 */
-		digitalToggle(PC0);
-		delay_ms(1000);
+//		lv_task_handler();
+//		ui_tick();
+    __WFI();
     /* add user code end 3 */
   }
 }

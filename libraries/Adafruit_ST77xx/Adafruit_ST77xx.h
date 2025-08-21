@@ -97,7 +97,7 @@ public:
                   int8_t RS, int8_t RST = -1);
 #endif // end !ESP8266
 
-  void setAddrWindow(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
+  void setAddrWindow(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1);
   void setRotation(uint8_t r);
   void enableDisplay(boolean enable);
   void enableTearing(boolean enable);

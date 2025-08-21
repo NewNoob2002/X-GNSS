@@ -21,6 +21,7 @@
  * SOFTWARE.
  */
 #include "delay.h"
+#include "lvgl.h"
 
 #ifndef SYSTICK_TICK_FREQ
 #  define SYSTICK_TICK_FREQ     1000 // Hz
@@ -60,7 +61,8 @@ void Delay_Init()
   */
 void SysTick_Handler(void)
 {
-    SystemTickCount++;
+  SystemTickCount++;
+	lv_tick_inc(1);
 }
 
 /**

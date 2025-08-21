@@ -155,18 +155,14 @@ void Adafruit_ST77xx::commonInit(const uint8_t *cmdList) {
   @param  h  Height of window
 */
 /**************************************************************************/
-void Adafruit_ST77xx::setAddrWindow(uint16_t x, uint16_t y, uint16_t w,
-                                    uint16_t h) {
-  x += _xstart;
-  y += _ystart;
-  uint32_t xa = ((uint32_t)x << 16) | (x + w - 1);
-  uint32_t ya = ((uint32_t)y << 16) | (y + h - 1);
-
+void Adafruit_ST77xx::setAddrWindow(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1){
   writeCommand(ST77XX_CASET); // Column addr set
-  SPI_WRITE32(xa);
+  SPI_WRITE16(x0 + _xstart);
+  SPI_WRITE16(x1 + _xstart);
 
   writeCommand(ST77XX_RASET); // Row addr set
-  SPI_WRITE32(ya);
+  SPI_WRITE16(y0 + _ystart);
+  SPI_WRITE16(y1 + _ystart);
 
   writeCommand(ST77XX_RAMWR); // write to RAM
 }
