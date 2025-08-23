@@ -4,7 +4,7 @@
 #include "usart_config.h"
 
 #ifndef SERIAL_BUFFER_SIZE
-#define SERIAL_BUFFER_SIZE 64
+#define SERIAL_BUFFER_SIZE 128
 #endif
 #ifndef SERIAL_TX_BUFFER_SIZE
 #define SERIAL_TX_BUFFER_SIZE SERIAL_BUFFER_SIZE

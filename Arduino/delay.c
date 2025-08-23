@@ -54,6 +54,7 @@ void Delay_Init()
                    SysTick_CTRL_ENABLE_Msk;
 }
 
+
 /**
   * @brief  系统滴答定时器中断入口
   * @param  无
@@ -62,7 +63,7 @@ void Delay_Init()
 void SysTick_Handler(void)
 {
   SystemTickCount++;
-	lv_tick_inc(1);
+//	lv_tick_inc(1);
 }
 
 /**

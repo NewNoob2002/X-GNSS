@@ -1,12 +1,9 @@
 #ifndef __HAL_H
 #define __HAL_H
-
-#include <stdint.h>
+#include "Arduino.h"
 #include "mcu_types.h"
 #include "mcu_define.h"
-#include "Arduino.h"
 #include "HAL_Config.h"
-
 
 namespace HAL{
 	

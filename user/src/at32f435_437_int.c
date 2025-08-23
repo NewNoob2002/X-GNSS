@@ -87,19 +87,19 @@ void NMI_Handler(void)
   * @param  none
   * @retval none
   */
-void HardFault_Handler(void)
-{
-  /* add user code begin HardFault_IRQ 0 */
+//void HardFault_Handler(void)
+//{
+//  /* add user code begin HardFault_IRQ 0 */
 
-  /* add user code end HardFault_IRQ 0 */
-  /* go to infinite loop when hard fault exception occurs */
-  while (1)
-  {
-    /* add user code begin W1_HardFault_IRQ 0 */
+//  /* add user code end HardFault_IRQ 0 */
+//  /* go to infinite loop when hard fault exception occurs */
+//  while (1)
+//  {
+//    /* add user code begin W1_HardFault_IRQ 0 */
 
-    /* add user code end W1_HardFault_IRQ 0 */
-  }
-}
+//    /* add user code end W1_HardFault_IRQ 0 */
+//  }
+//}
 
 /**
   * @brief  this function handles memory manage exception.
@@ -193,15 +193,15 @@ void DebugMon_Handler(void)
   * @param  none
   * @retval none
   */
-void PendSV_Handler(void)
-{
-  /* add user code begin PendSV_IRQ 0 */
+//void PendSV_Handler(void)
+//{
+//  /* add user code begin PendSV_IRQ 0 */
 
-  /* add user code end PendSV_IRQ 0 */
-  /* add user code begin PendSV_IRQ 1 */
+//  /* add user code end PendSV_IRQ 0 */
+//  /* add user code begin PendSV_IRQ 1 */
 
-  /* add user code end PendSV_IRQ 1 */
-}
+//  /* add user code end PendSV_IRQ 1 */
+//}
 
 /**
   * @brief  this function handles systick handler.

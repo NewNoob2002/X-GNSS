@@ -170,6 +170,6 @@ extern SPIClass SPI_SD;
 #endif
 #if defined(SPI3_ENABLE)
 extern SPIClass SPI;
-// #define USART1_IOMUX_ENABLE
+#define SPI_HAS_TRANSACTION
 #endif
 #endif

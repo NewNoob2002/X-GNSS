@@ -165,13 +165,10 @@ extern "C" {
 
 /* exported functions ------------------------------------------------------- */
   /* system clock config. */
-  void wk_system_clock_config(void);
-
-  /* config periph clock. */
-  void wk_periph_clock_config(void);
+  void system_clock_init(void);
 
   /* nvic config. */
-  void wk_nvic_config(void);
+  void nvic_config(void);
 
 /* add user code begin exported functions */
 

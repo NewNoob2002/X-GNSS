@@ -590,8 +590,7 @@ void Adafruit_SPITFT::initSPI(uint32_t freq, uint8_t spiMode) {
 #endif
 #endif // end SPI_INTERFACES_COUNT
     ) {
-//      hwspi._spi->begin(hwspi._freq, SPI_FIRST_BIT_MSB, hwspi._mode);
-			hwspi._spi->begin();
+			hwspi._spi->begin(hwspi.settings);
     }
   } else if (connection == TFT_SOFT_SPI) {
 

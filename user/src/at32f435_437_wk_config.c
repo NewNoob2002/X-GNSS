@@ -1,66 +1,4 @@
-/* add user code begin Header */
-/**
-  **************************************************************************
-  * @file     at32f435_437_wk_config.c
-  * @brief    work bench config program
-  **************************************************************************
-  *                       Copyright notice & Disclaimer
-  *
-  * The software Board Support Package (BSP) that is made available to
-  * download from Artery official website is the copyrighted work of Artery.
-  * Artery authorizes customers to use, copy, and distribute the BSP
-  * software and its related documentation for the purpose of design and
-  * development in conjunction with Artery microcontrollers. Use of the
-  * software is governed by this copyright notice and the following disclaimer.
-  *
-  * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
-  * GUARANTEES OR REPRESENTATIONS OF ANY KIND. ARTERY EXPRESSLY DISCLAIMS,
-  * TO THE FULLEST EXTENT PERMITTED BY LAW, ALL EXPRESS, IMPLIED OR
-  * STATUTORY OR OTHER WARRANTIES, GUARANTEES OR REPRESENTATIONS,
-  * INCLUDING BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY,
-  * FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
-  *
-  **************************************************************************
-  */
-/* add user code end Header */
-
 #include "at32f435_437_wk_config.h"
-
-/* private includes ----------------------------------------------------------*/
-/* add user code begin private includes */
-
-/* add user code end private includes */
-
-/* private typedef -----------------------------------------------------------*/
-/* add user code begin private typedef */
-
-/* add user code end private typedef */
-
-/* private define ------------------------------------------------------------*/
-/* add user code begin private define */
-
-/* add user code end private define */
-
-/* private macro -------------------------------------------------------------*/
-/* add user code begin private macro */
-
-/* add user code end private macro */
-
-/* private variables ---------------------------------------------------------*/
-/* add user code begin private variables */
-
-/* add user code end private variables */
-
-/* private function prototypes --------------------------------------------*/
-/* add user code begin function prototypes */
-
-/* add user code end function prototypes */
-
-/* private user code ---------------------------------------------------------*/
-/* add user code begin 0 */
-
-/* add user code end 0 */
-
 /**
   * @brief  system clock config program
   * @note   the system clock is configured as follow:
@@ -84,7 +22,7 @@
   * @param  none
   * @retval none
   */
-void wk_system_clock_config(void)
+void system_clock_init(void)
 {
   /* reset crm */
   crm_reset();
@@ -161,28 +99,11 @@ void wk_system_clock_config(void)
 }
 
 /**
-  * @brief  config periph clock
-  * @param  none
-  * @retval none
-  */
-void wk_periph_clock_config(void)
-{
-  /* enable gpioa periph clock */
-  crm_periph_clock_enable(CRM_GPIOA_PERIPH_CLOCK, TRUE);
-
-  /* enable gpioc periph clock */
-  crm_periph_clock_enable(CRM_GPIOC_PERIPH_CLOCK, TRUE);
-
-  /* enable gpioh periph clock */
-  crm_periph_clock_enable(CRM_GPIOH_PERIPH_CLOCK, TRUE);
-}
-
-/**
   * @brief  nvic config
   * @param  none
   * @retval none
   */
-void wk_nvic_config(void)
+void nvic_config(void)
 {
   nvic_priority_group_config(NVIC_PRIORITY_GROUP_4);
 

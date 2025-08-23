@@ -99,7 +99,7 @@ void HAL::Display_Init()
     screen.init(CONFIG_SCREEN_WIDTH, CONFIG_SCREEN_HIEGHT);
     screen.setRotation(3);
     screen.displayOff();
-    screen.fillScreen(YELLOW);
+    screen.fillScreen(RED);
     delay(150);
     screen.displayOn();
 

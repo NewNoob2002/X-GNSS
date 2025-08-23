@@ -36,37 +36,36 @@ void SPIClass::SPI_Settings(
     spi_clock_phase_type SPI_CPHA_x;
     spi_enable(this->spi_x, FALSE);
 
-    switch (SPI_MODEx)
-    {
-    case SPI_MODE0:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
-        break;
-    case SPI_MODE1:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
-        break;
-    case SPI_MODE2:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
-        break;
-    case SPI_MODE3:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
-        break;
-    default:
-        return;
+    switch (SPI_MODEx) {
+        case SPI_MODE0:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
+            break;
+        case SPI_MODE1:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
+            break;
+        case SPI_MODE2:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
+            break;
+        case SPI_MODE3:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
+            break;
+        default:
+            return;
     }
 
     spi_default_para_init(&SPI_InitStructure);
-    SPI_InitStructure.transmission_mode = SPI_TRANSMIT_HALF_DUPLEX_TX;
-    SPI_InitStructure.master_slave_mode = SPI_Mode_x;
-    SPI_InitStructure.mclk_freq_division = SPI_BaudRatePrescaler_x;
+    SPI_InitStructure.transmission_mode      = SPI_TRANSMIT_HALF_DUPLEX_TX;
+    SPI_InitStructure.master_slave_mode      = SPI_Mode_x;
+    SPI_InitStructure.mclk_freq_division     = SPI_BaudRatePrescaler_x;
     SPI_InitStructure.first_bit_transmission = SPI_FirstBit_x;
-    SPI_InitStructure.frame_bit_num = SPI_DataSize_x;
-    SPI_InitStructure.clock_polarity = SPI_CPOL_x;
-    SPI_InitStructure.clock_phase = SPI_CPHA_x;
-    SPI_InitStructure.cs_mode_selection = SPI_NSS_x;
+    SPI_InitStructure.frame_bit_num          = SPI_DataSize_x;
+    SPI_InitStructure.clock_polarity         = SPI_CPOL_x;
+    SPI_InitStructure.clock_phase            = SPI_CPHA_x;
+    SPI_InitStructure.cs_mode_selection      = SPI_NSS_x;
 
     spi_init(this->spi_x, &this->SPI_InitStructure);
 
@@ -75,21 +74,18 @@ void SPIClass::SPI_Settings(
 
 void SPIClass::begin()
 {
-    if (_isInitlized)
-    {
+    if (_isInitlized) {
         return;
     }
 
-    if (!_div)
-    {
+    if (!_div) {
         setClock(_freq);
     }
 
     spi_i2s_reset(this->spi_x);
     crm_periph_clock_enable(this->spi_config->peripheral.peripheral_clock_id, TRUE);
 
-    if (this->spi_config->peripheral.miso_pin != PIN_MAX)
-    {
+    if (this->spi_config->peripheral.miso_pin != PIN_MAX) {
         pinMode(this->spi_config->peripheral.miso_pin, OUTPUT_AF_PP);
     }
     pinMode(this->spi_config->peripheral.mosi_pin, OUTPUT_AF_PP);
@@ -101,8 +97,7 @@ void SPIClass::begin()
     gpio_pin_mux_config(digitalPinToPort(this->spi_config->peripheral.clk_pin),
                         (gpio_pins_source_type)digitalPinToBitPos(this->spi_config->peripheral.clk_pin),
                         this->spi_config->peripheral.mux_sel);
-    if (this->spi_config->peripheral.miso_pin != PIN_MAX)
-    {
+    if (this->spi_config->peripheral.miso_pin != PIN_MAX) {
         gpio_pin_mux_config(digitalPinToPort(this->spi_config->peripheral.miso_pin),
                             (gpio_pins_source_type)digitalPinToBitPos(this->spi_config->peripheral.miso_pin),
                             this->spi_config->peripheral.mux_sel);
@@ -144,25 +139,32 @@ void SPIClass::end(void)
 
 void SPIClass::setClock(uint32_t clock)
 {
-    if (clock == 0 || clock < 1 * 1000 * 1000)
-    {
+    if (clock == 0) {
         return;
     }
     uint8_t cdev = spi_x->ctrl1_bit.mdiv_l;
-    if (_freq != clock || cdev != _div)
-    {
+    if (_freq != clock || cdev != _div) {
         _freq = clock;
-        _div = spiFrequencyToClockDiv(_freq);
-        spi_x->ctrl2_bit.mdiv3en = FALSE;
-        spi_x->ctrl2_bit.mdiv_h = FALSE;
-        spi_x->ctrl1_bit.mdiv_l = _div;
+        _div  = spiFrequencyToClockDiv(_freq);
+        if (_div <= SPI_MCLK_DIV_256) {
+            spi_x->ctrl2_bit.mdiv3en = FALSE;
+            spi_x->ctrl2_bit.mdiv_h  = FALSE;
+            spi_x->ctrl1_bit.mdiv_l  = _div;
+        } else if (_div == SPI_MCLK_DIV_3) {
+            spi_x->ctrl2_bit.mdiv3en = TRUE;
+            spi_x->ctrl2_bit.mdiv_h  = FALSE;
+            spi_x->ctrl1_bit.mdiv_l  = 0;
+        } else {
+            spi_x->ctrl2_bit.mdiv3en = FALSE;
+            spi_x->ctrl2_bit.mdiv_h  = TRUE;
+            spi_x->ctrl1_bit.mdiv_l  = _div & 0x7;
+        }
     }
 }
 
 void SPIClass::setClockDivider(uint32_t Div)
 {
-    if (Div == 0)
-    {
+    if (Div == 0) {
         Div = 1;
     }
 #if SPI_CLASS_AVR_COMPATIBILITY_MODE
@@ -214,30 +216,29 @@ void SPIClass::setDataMode(uint8_t dataMode)
 
     If someone finds this is not the case or sees a logic error with this let me know ;-)
      */
-    spi_enable(this->spi_config->peripheral.register_base, FALSE);
+//    spi_enable(this->spi_config->peripheral.register_base, FALSE);
     spi_clock_polarity_type SPI_CPOL_x;
     spi_clock_phase_type SPI_CPHA_x;
 
-    switch (dataMode)
-    {
-    case SPI_MODE0:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
-        break;
-    case SPI_MODE1:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
-        break;
-    case SPI_MODE2:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
-        break;
-    case SPI_MODE3:
-        SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
-        SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
-        break;
-    default:
-        return;
+    switch (dataMode) {
+        case SPI_MODE0:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
+            break;
+        case SPI_MODE1:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_LOW;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
+            break;
+        case SPI_MODE2:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_1EDGE;
+            break;
+        case SPI_MODE3:
+            SPI_CPOL_x = SPI_CLOCK_POLARITY_HIGH;
+            SPI_CPHA_x = SPI_CLOCK_PHASE_2EDGE;
+            break;
+        default:
+            return;
     }
     spi_x->ctrl1_bit.clkpol = SPI_CPOL_x;
     spi_x->ctrl1_bit.clkpha = SPI_CPHA_x;
@@ -252,7 +253,7 @@ void SPIClass::beginTransaction(SPISettings settings)
     setDataMode(settings.dataMode);
     setDataSize(settings.dataSize);
 
-    spi_enable(this->spi_config->peripheral.register_base, TRUE);
+    spi_enable(this->spi_x, TRUE);
 }
 
 // void SPIClass::beginTransactionSlave(void)
@@ -262,7 +263,7 @@ void SPIClass::beginTransaction(SPISettings settings)
 
 void SPIClass::endTransaction(void)
 {
-    spi_enable(this->spi_config->peripheral.register_base, FALSE);
+    spi_enable(this->spi_x, FALSE);
 }
 
 uint16_t SPIClass::read(void)
@@ -279,8 +280,7 @@ void SPIClass::read(uint8_t *buf, uint32_t len)
     SPI_I2S_RXDATA_VOLATILE(this->spi_config->peripheral.register_base);
     SPI_I2S_TXDATA(this->spi_config->peripheral.register_base, 0x00FF);
 
-    while ((--len))
-    {
+    while ((--len)) {
         SPI_I2S_WAIT_TX_EMPTY(this->spi_config->peripheral.register_base);
         noInterrupts();
         SPI_I2S_TXDATA(this->spi_config->peripheral.register_base, 0x00FF);
@@ -301,8 +301,7 @@ void SPIClass::write(uint16_t data)
 
 void SPIClass::write(uint16_t data, uint32_t n)
 {
-    while ((n--) > 0)
-    {
+    while ((n--) > 0) {
         SPI_I2S_TXDATA(this->spi_config->peripheral.register_base, data);  // write the data to be transmitted into the SPI_DR register (this clears the TXE flag)
         SPI_I2S_WAIT_TX_EMPTY(this->spi_config->peripheral.register_base); // wait till Tx empty
     }
@@ -312,8 +311,7 @@ void SPIClass::write(uint16_t data, uint32_t n)
 
 void SPIClass::write(const uint8_t *data, uint32_t length)
 {
-    while (length--)
-    {
+    while (length--) {
         SPI_I2S_WAIT_TX_EMPTY(this->spi_config->peripheral.register_base);
         SPI_I2S_TXDATA(this->spi_config->peripheral.register_base, *data++);
     }
@@ -323,8 +321,7 @@ void SPIClass::write(const uint8_t *data, uint32_t length)
 
 void SPIClass::write(const uint16_t *data, uint32_t length)
 {
-    while (length--)
-    {
+    while (length--) {
         SPI_I2S_WAIT_TX_EMPTY(this->spi_config->peripheral.register_base);
         SPI_I2S_TXDATA(this->spi_config->peripheral.register_base, *data++);
     }
@@ -343,6 +340,10 @@ uint8_t SPIClass::transfer(uint8_t wr_data) const
 
 uint8_t SPIClass::transfer(uint8_t *buffer, size_t len) const
 {
+	 while (len--)
+	 {
+		 transfer(*buffer++);
+	 }
     return len;
 }
 
